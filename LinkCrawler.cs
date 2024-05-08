@@ -12,7 +12,7 @@ namespace ArticleScraper
 {
     internal class LinkCrawler
     {
-        public static string[] GetUrlsFromRSS(string url)
+        public static string[] GetUrlsFromRSS(string url, bool usingProxy=false)
         {
             List<string> urls = new List<string>();
 
@@ -25,7 +25,15 @@ namespace ArticleScraper
                 var links = item.Links;
                 foreach(var link in links)
                 {
-                    urls.Add(link.Uri.OriginalString);
+                    string ogString = link.Uri.OriginalString;
+                    if (usingProxy)
+                    {
+                        ogString = $"http://127.0.0.1:5000/{ogString}";
+                    }
+                    if (!urls.Contains(ogString))
+                    {
+                        urls.Add(ogString);
+                    }
                 }
             }
 

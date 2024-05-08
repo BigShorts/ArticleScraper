@@ -9,9 +9,9 @@ namespace ArticleScraper
 {
     internal class ArticleMaker
     {
-        public SmartReader.Article[] MakeArticlesFromLinks(string[] links)
+        public static Article[] MakeArticlesFromLinks(string[] links)
         {
-            List<SmartReader.Article> articles = new();
+            List<Article> articles = new();
             foreach (string link in links)
             {
                 var article = MakeArticle(link);
@@ -23,15 +23,16 @@ namespace ArticleScraper
             return articles.ToArray();
         }
 
-        private Article? MakeArticle(string link)
+        private static Article? MakeArticle(string link)
         {
-            var sr = new SmartReader.Reader(link);
+            var sr = new Reader(link);
             var article = sr.GetArticle();
 
             if (article.IsReadable)
             {
                 return article;
             }
+            Console.WriteLine("FUCK");
             return null;
         }
     }
