@@ -21,6 +21,7 @@ namespace ArticleScraper
 	                        ""title""	TEXT,
 	                        ""link""	TEXT,
 	                        ""textContent""	TEXT,
+                            ""summary""	TEXT,
 	                        PRIMARY KEY(""id"" AUTOINCREMENT)
                             );";
 
