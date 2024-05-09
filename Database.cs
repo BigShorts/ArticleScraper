@@ -31,7 +31,7 @@ namespace ArticleScraper
                     int result = command.ExecuteNonQuery();
 
 
-                    if (result < 0) Console.WriteLine("Error making table");
+                    if (result < 0) Console.WriteLine("Error making table.");
                 }
             }
         }
@@ -40,12 +40,12 @@ namespace ArticleScraper
         {
             if (!File.Exists("articles.db"))
             {
-                Console.WriteLine("Database not found, creating");
+                Console.Write(" | Database not found, creating it now!");
                 MakeDatabase();
             }
 
             var title = article.Title;
-            var textContent = article.TextContent;
+            var textContent = article.TextContent.Trim();
             var link = article.Uri.OriginalString;
 
             if (link.Contains(@"http://127.0.0.1:5000/"))
@@ -68,8 +68,16 @@ namespace ArticleScraper
                     int result = command.ExecuteNonQuery();
 
 
-                    if (result < 0) Console.WriteLine("Error inserting");
+                    if (result < 0) Console.WriteLine("\nError inserting article.");
                 }
+            }
+        }
+
+        public static void WriteArticlesToDatabase(Article[] articles)
+        {
+            foreach (var article in articles)
+            {
+                WriteArticleToDatabase(article);
             }
         }
     }

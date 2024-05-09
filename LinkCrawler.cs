@@ -16,28 +16,36 @@ namespace ArticleScraper
         {
             List<string> urls = new List<string>();
 
-            XmlReader reader = XmlReader.Create(url);
-            SyndicationFeed feed = SyndicationFeed.Load(reader);
-            reader.Close();
-
-            foreach(SyndicationItem item in feed.Items)
+            try
             {
-                var links = item.Links;
-                foreach(var link in links)
+                XmlReader reader = XmlReader.Create(url);
+                SyndicationFeed feed = SyndicationFeed.Load(reader);
+                reader.Close();
+
+                foreach (SyndicationItem item in feed.Items)
                 {
-                    string ogString = link.Uri.OriginalString;
-                    if (usingProxy)
+                    var links = item.Links;
+                    foreach (var link in links)
                     {
-                        ogString = $"http://127.0.0.1:5000/{ogString}";
-                    }
-                    if (!urls.Contains(ogString))
-                    {
-                        urls.Add(ogString);
+                        string ogString = link.Uri.OriginalString;
+                        if (usingProxy)
+                        {
+                            ogString = $"http://127.0.0.1:5000/{ogString}";
+                        }
+                        if (!urls.Contains(ogString))
+                        {
+                            urls.Add(ogString);
+                        }
                     }
                 }
-            }
 
-            return urls.ToArray();
+                return urls.ToArray();
+            }
+            catch (HttpRequestException)
+            {
+                Console.Write(" | Recieved HttpRequestException, maybe bad RSS feed?");
+                return urls.ToArray();
+            }
         }
     }
 }

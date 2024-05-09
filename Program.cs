@@ -1,12 +1,27 @@
 ﻿using ArticleScraper;
+using Newtonsoft.Json.Linq;
 using SmartReader;
+using System.Text.Json;
 
-string[] links = LinkCrawler.GetUrlsFromRSS("https://rss.nytimes.com/services/xml/rss/nyt/Movies.xml", true);
-Article[] articles = ArticleMaker.MakeArticlesFromLinks(links);
-foreach (Article article in articles)
+string fileContent = File.ReadAllText("rss.json");
+JObject json = JObject.Parse(fileContent);
+var feeds = json["Feeds"];
+
+foreach (var item in feeds)
 {
-    if (article != null)
+    string name = item["Name"].Value<string>();
+    bool proxy = item["Proxy"].Value<bool>();
+    JArray rsses = item["URLs"].Value<JArray>();
+
+    Console.WriteLine("---------------------");
+    Console.WriteLine($"Crawling {name}.");
+    Console.Write("---------------------");
+    foreach (var rss in rsses)
     {
-        Database.WriteArticleToDatabase(article);
+        Console.Write($"\n{rss}");
+        string[] urls = LinkCrawler.GetUrlsFromRSS(rss.ToString(), proxy);
+        Article[] articles = ArticleMaker.MakeArticlesFromLinks(urls);
+        Database.WriteArticlesToDatabase(articles);
     }
+    Console.WriteLine();
 }

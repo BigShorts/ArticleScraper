@@ -30,9 +30,10 @@ namespace ArticleScraper
 
             if (article.IsReadable)
             {
+                Console.Write($"\n\t{link}");
                 return article;
             }
-            Console.WriteLine("FUCK");
+            Console.Write(" | There was an error making this article.");
             return null;
         }
     }
