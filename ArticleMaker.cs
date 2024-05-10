@@ -25,15 +25,28 @@ namespace ArticleScraper
 
         private static Article? MakeArticle(string link)
         {
-            var sr = new Reader(link);
-            var article = sr.GetArticle();
-
-            if (article.IsReadable)
+            string fileName = link.Split(@"/").Last();
+            //Console.WriteLine(fileName);
+            if((fileName.Contains(".") && !fileName.EndsWith(".html")) || fileName.StartsWith("https://s3.amazonaws.com"))
             {
-                Console.Write($"\n\t{link}");
-                return article;
+                // Not html, BOO GET THE FUCK OUT HERE FUCK YOU NVIDIA
+                return null;
             }
-            Console.Write(" | There was an error making this article.");
+            var sr = new Reader(link);
+            try
+            {
+                var article = sr.GetArticle();
+                if (article.IsReadable)
+                {
+                    Console.Write($"\n\t{link}");
+                    return article;
+                }
+                Console.Write(" | There was an error making this article.");
+            } catch (HttpRequestException e)
+            {
+                Console.Write($" | {e.Message}");
+            }
+            
             return null;
         }
     }

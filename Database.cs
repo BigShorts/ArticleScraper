@@ -78,6 +78,7 @@ namespace ArticleScraper
         {
             foreach (var article in articles)
             {
+                if (article == null) continue;
                 WriteArticleToDatabase(article);
             }
         }

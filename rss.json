@@ -1,6 +1,16 @@
 {
   "Feeds": [
     {
+      "Name": "NVIDIA",
+      "Proxy": false,
+      "URLs": [
+        "https://nvidianews.nvidia.com/releases.xml",
+        "https://nvidianews.nvidia.com/cats/corporate.xml",
+        "https://nvidianews.nvidia.com/cats/press_release.xml"
+      ],
+      "Commercial-Use": false
+    },
+    {
       "Name": "CNN",
       "Proxy": false,
       "URLs": [
@@ -168,37 +178,37 @@
     {
       "Name": "Yahoo News",
       "Proxy": false,
-      "URLs": ["https://www.yahoo.com/news/rss"]
+      "URLs": [ "https://www.yahoo.com/news/rss" ]
     },
     {
       "Name": "The Verge",
       "Proxy": false,
-      "URLs": ["https://www.theverge.com/rss/index.xml"]
+      "URLs": [ "https://www.theverge.com/rss/index.xml" ]
     },
     {
       "Name": "Financial Times",
       "Proxy": false,
-      "URLs": ["https://www.ft.com/news-feed?format=rss"]
+      "URLs": [ "https://www.ft.com/news-feed?format=rss" ]
     },
     {
       "Name": "CNBC",
       "Proxy": false,
-      "URLs": ["https://www.cnbc.com/id/100727362/device/rss/rss.html"]
+      "URLs": [ "https://www.cnbc.com/id/100727362/device/rss/rss.html" ]
     },
     {
       "Name": "Apple Newsroom",
       "Proxy": false,
-      "URLs": ["https://www.apple.com/newsroom/rss-feed.rss"]
+      "URLs": [ "https://www.apple.com/newsroom/rss-feed.rss" ]
     },
     {
       "Name": "Washington Post",
       "Proxy": false,
-      "URLs": ["https://feeds.washingtonpost.com/rss/world"]
+      "URLs": [ "https://feeds.washingtonpost.com/rss/world" ]
     },
     {
       "Name": "JP Morgan Chase",
       "Proxy": false,
-      "URLs": ["https://jpmorganchaseco.gcs-web.com/rss/news-releases.xml"]
+      "URLs": [ "https://jpmorganchaseco.gcs-web.com/rss/news-releases.xml" ]
     }
   ]
 }

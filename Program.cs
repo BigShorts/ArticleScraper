@@ -1,7 +1,9 @@
 ﻿using ArticleScraper;
 using Newtonsoft.Json.Linq;
 using SmartReader;
-using System.Text.Json;
+
+File.Delete("articles.db");
+Console.WriteLine("Deleting database");
 
 string fileContent = File.ReadAllText("rss.json");
 JObject json = JObject.Parse(fileContent);
